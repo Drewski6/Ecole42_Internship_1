@@ -1,4 +1,4 @@
-# Key Pharma Consulting (Atlas Authorizaitons)
+# Key Pharma Consulting (Atlas Authorizations)
 
 AtlasAuth is a healthcare-focused web application built during a six-month school internship in the United States. The project was created for a small company that wanted to begin building software for healthcare workflows. I programmed the full application myself, combining my background as a pharmacist with my interest in software development.
 
