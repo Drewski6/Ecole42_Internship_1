@@ -20,17 +20,20 @@ I also made a video to present this project at school which you can watch here: 
 - Runs locally with Docker using separate services for Django, Nginx, and MySQL.
 - Uses Tailwind CSS and Flowbite for the interface.
 
-## Why This Was Challenging
+## What I Built
 
-This project required more than building pages. It brought together several areas that are usually difficult for students because they cross the boundary between application code, infrastructure, security, and real-world domain needs.
+The application is structured around different types of users and healthcare records. Its most developed workflow is a staff-facing provider records area where authenticated users can create, view, and delete provider information, including contact details and addresses. An update workflow is also present and is still being refined.
 
-Authentication was one of the largest challenges. The app uses a custom Django user model, customized allauth forms, password reset/change templates, login code confirmation, session behavior, and group-based redirects after login. These are sensitive flows where small mistakes can create confusing user experiences or security problems.
+The repository also includes a public website, staff and provider portals, account settings, a user suggestion form, and foundations for future patient records, prior authorization records, notes, logs, and API endpoints.
 
-The subdomain architecture also added complexity. Instead of one simple Django URL tree, the project uses `django-hosts` so the public site, staff portal, provider portal, and API can live under different hostnames. Middleware checks the current host and verifies that the logged-in user belongs to the correct group before allowing access.
+## What I Learned
 
-The deployment setup was another important learning area. The app is containerized with Docker Compose, with Django running behind an Nginx reverse proxy and using MySQL as the database. This made the project closer to a real service than a class exercise, because local development had to account for services, ports, environment files, database health checks, migrations, static files, and HTTPS/proxy behavior.
-
-The healthcare context mattered too. Even at an early stage, the app needed to think in terms of staff users, providers, patients, addresses, phone numbers, account privacy, and security expectations. My pharmacy background helped me understand why healthcare software must be careful with identity, access control, and clean data modeling.
+- **Building a CRUD application:** I created forms, views, templates, validation rules, and database operations for a provider-record management workflow, including an update flow that I iterated on during development.
+- **Designing relational database models:** I used Django models and MySQL to represent users, providers, addresses, patients, and suggestions. Related provider and address records are saved together inside database transactions.
+- **Implementing role-based security:** Staff and provider areas use separate subdomains. Custom middleware checks authentication and Django group membership before allowing access to restricted areas.
+- **Securing authentication flows:** I extended Django's user model and integrated `django-allauth` for login, signup, logout, password reset, and password change workflows. I also added password validation, CSRF-protected forms, login rate-limit tests, signup bot protection, and optional email login codes with resend limits.
+- **Working across the full stack:** I built server-rendered Django pages and styled them with Tailwind CSS and Flowbite components.
+- **Containerizing a web application:** I used Docker Compose to run Django, MySQL, and NGINX services. NGINX acts as a reverse proxy and redirects local HTTP traffic to HTTPS using a development certificate.
 
 ## Tech Stack
 
@@ -43,6 +46,6 @@ The healthcare context mattered too. Even at an early stage, the app needed to t
 - Tailwind CSS
 - Flowbite
 
-## Project Status
+## Project Scope
 
-This repository represents the work completed during the internship: a functional Django foundation for a healthcare portal, with authentication, role-based sections, record models, and local infrastructure in place. It is still a development-stage project, but it demonstrates the core architecture needed to continue building a healthcare operations platform.
+AtlasAuth is an internship prototype and learning project, not a production healthcare system. Provider record management and account security received the most development attention. I layed the groudwork for this project and left the source code for the business to continue to develop after I left. Also while programming, I left detailed notes so that later workers could pick up where I left off. This project was managed inside GitHub, so I used issues and project boards to detail todos for future developers.
